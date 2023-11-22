@@ -1,11 +1,12 @@
 using B24Api;
 using B24BusynessProcess.Config;
+using B24BusynessProcess.Forms.ConfigForm;
 
-namespace B24BusynessProcess
+namespace B24BusynessProcess.Forms.B24BusynessProcessForm
 {
     public partial class B24BusynessProcessForm : Form
     {
-        private ConfigForm? configForm = null;
+        private ConfigForm.ConfigForm? configForm = null;
         private readonly Config.Config config;
         private readonly Crm crmApi;
 
@@ -28,11 +29,12 @@ namespace B24BusynessProcess
             getConfigForm().Show();
         }
 
-        private ConfigForm getConfigForm()
+        private ConfigForm.ConfigForm getConfigForm()
         {
             if (configForm == null || configForm.IsDisposed)
             {
-                configForm = new ConfigForm(config);
+                configForm = new ConfigForm.ConfigForm(config);
+                configForm.Done += ConfigForm_Done;
             }
 
             return configForm;
@@ -40,10 +42,16 @@ namespace B24BusynessProcess
 
         private async void TestButton_Click(object sender, EventArgs e)
         {
-            var message = "";
+            CrmEntitiesListTest.Clear();
             (await crmApi.DealList())?.ForEach(
-                deal => message += "[" + deal.ID + "] " + deal.TITLE + "\n");
-            MessageBox.Show(message);
+                deal => CrmEntitiesListTest.AddEntity(deal.ID, deal.TITLE));
+        }
+
+        private void ConfigForm_Done(object sender, DoneEventArgs e)
+        {
+            config.WebHook = e.WebHook ?? "";
+
+            ConfigStorage.Save(config);
         }
     }
 }

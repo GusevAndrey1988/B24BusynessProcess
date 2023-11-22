@@ -1,4 +1,4 @@
-﻿namespace B24BusynessProcess
+﻿namespace B24BusynessProcess.Forms.B24BusynessProcessForm
 {
     partial class B24BusynessProcessForm
     {
@@ -33,6 +33,7 @@
             this.ConfigMainMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitMainMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TestButton = new System.Windows.Forms.Button();
+            this.CrmEntitiesListTest = new B24BusynessProcess.Forms.Components.CrmEntitiesList();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,11 +80,19 @@
             this.TestButton.UseVisualStyleBackColor = true;
             this.TestButton.Click += new System.EventHandler(this.TestButton_Click);
             // 
+            // CrmEntitiesListTest
+            // 
+            this.CrmEntitiesListTest.Location = new System.Drawing.Point(162, 63);
+            this.CrmEntitiesListTest.Name = "CrmEntitiesListTest";
+            this.CrmEntitiesListTest.Size = new System.Drawing.Size(480, 329);
+            this.CrmEntitiesListTest.TabIndex = 2;
+            // 
             // B24BusynessProcessForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.CrmEntitiesListTest);
             this.Controls.Add(this.TestButton);
             this.Controls.Add(this.MainMenu);
             this.MainMenuStrip = this.MainMenu;
@@ -103,5 +112,6 @@
         private ToolStripMenuItem ConfigMainMenuItem;
         private ToolStripMenuItem ExitMainMenuItem;
         private Button TestButton;
+        private Components.CrmEntitiesList CrmEntitiesListTest;
     }
 }

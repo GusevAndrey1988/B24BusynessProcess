@@ -1,4 +1,4 @@
-﻿namespace B24BusynessProcess
+﻿namespace B24BusynessProcess.Forms.ConfigForm
 {
     partial class ConfigForm
     {
@@ -91,6 +91,6 @@
         private Label HookLabel;
         private TextBox HookInput;
         private Button SaveConfigButton;
-        private Button CancelButton;
+        private new Button CancelButton;
     }
 }

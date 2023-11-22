@@ -1,3 +1,5 @@
+using B24BusynessProcess.Forms.B24BusynessProcessForm;
+
 namespace B24BusynessProcess
 {
     internal static class Program
