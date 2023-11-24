@@ -13,7 +13,7 @@ namespace B24BusynessProcess
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new B24BusynessProcessForm(new B24Api.Crm()));
+            Application.Run(new B24BusynessProcessForm());
         }
     }
 }

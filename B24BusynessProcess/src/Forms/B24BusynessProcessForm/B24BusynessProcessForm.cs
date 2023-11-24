@@ -1,4 +1,5 @@
-using B24Api;
+using B24Api.Crm;
+using B24Api.Crm.SmartProcess;
 using B24BusynessProcess.Config;
 using B24BusynessProcess.Forms.ConfigForm;
 
@@ -8,15 +9,14 @@ namespace B24BusynessProcess.Forms.B24BusynessProcessForm
     {
         private ConfigForm.ConfigForm? configForm = null;
         private readonly Config.Config config;
-        private readonly Crm crmApi;
+        private readonly SmartProcessResource smartProcessResource;
 
-        public B24BusynessProcessForm(Crm crmApi)
+        public B24BusynessProcessForm()
         {
             InitializeComponent();
 
             config = ConfigStorage.Load();
-            this.crmApi = crmApi;
-            this.crmApi.WebHook = config.WebHook;
+            smartProcessResource = new SmartProcessResource(new B24ApiGetway(config.WebHook), 181);
         }
 
         private void ExitMainMenuItem_Click(object sender, EventArgs e)
@@ -43,8 +43,11 @@ namespace B24BusynessProcess.Forms.B24BusynessProcessForm
         private async void TestButton_Click(object sender, EventArgs e)
         {
             CrmEntitiesListTest.Clear();
-            (await crmApi.DealList())?.ForEach(
-                deal => CrmEntitiesListTest.AddEntity(deal.ID, deal.TITLE));
+            var fields = await smartProcessResource.Fields();
+            await Task.Run(() =>
+            {
+                MessageBox.Show(fields.First().Title);
+            });
         }
 
         private void ConfigForm_Done(object sender, DoneEventArgs e)
